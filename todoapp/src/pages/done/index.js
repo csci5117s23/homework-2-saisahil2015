@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import styles from '@/styles/Home.module.css';
 import TodoList from '@/components/todoList';
-import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,7 +22,6 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <TodoList tasks={TASKS} done={true}></TodoList>
-      <Link href='/todos'>Todos</Link>
     </>
   );
 }
