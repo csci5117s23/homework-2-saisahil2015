@@ -1,4 +1,5 @@
 import Todo from './todo';
+import styles from '../styles/ToDoList.module.css';
 
 export default function TodoList({ tasks, done }) {
   const taskContent = done
@@ -13,5 +14,5 @@ export default function TodoList({ tasks, done }) {
           return <Todo info={task.info}></Todo>;
         });
 
-  return <div>{taskContent}</div>;
+  return <div className={styles.todoList}>{taskContent}</div>;
 }
