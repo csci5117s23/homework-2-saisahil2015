@@ -6,6 +6,22 @@ import { app } from 'codehooks-js';
 import { crudlify } from 'codehooks-crudlify';
 import { date, object, string, boolean } from 'yup';
 
+//Do we need this?
+// const userAuth = async (req, res, next) => {
+//   try {
+//     const { authorization } = req.headers;
+//     if (authorization) {
+//       const token = authorization.replace('Bearer ', '');
+//       const token_parsed = jwtDecode(token);
+//       req.user_token = token_parsed;
+//     }
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+// app.use(userAuth);
+
 const todoYup = object({
   info: string().required(),
   checked: boolean().required(),

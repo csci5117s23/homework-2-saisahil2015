@@ -2,8 +2,11 @@ import { useState } from 'react';
 import styles from '../styles/ToDoList.module.css';
 import { putTask } from '@/modules/data';
 import Link from 'next/link';
+import { useAuth } from '@clerk/nextjs';
 
 export default function Todo({ todo, checked }) {
+  const { getToken } = useAuth();
+
   async function handleCheck(todo) {
     const updatedTask = {
       id: todo._id,
@@ -12,7 +15,8 @@ export default function Todo({ todo, checked }) {
       createdOn: todo.createdOn,
     };
     console.log("Here's the new task: ", updatedTask);
-    await putTask(updatedTask);
+    const token = await getToken({ template: 'codehooks' });
+    await putTask(token, updatedTask);
   }
 
   return checked ? (
@@ -24,7 +28,7 @@ export default function Todo({ todo, checked }) {
     </div>
   ) : (
     <div className={styles.todo}>
-      <Link href={`/todos:${todo._id}`}>{todo.info}</Link>
+      <Link href={`/todo/${todo._id}`}>{todo.info}</Link>
       <label>
         <input
           type='checkbox'

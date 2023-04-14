@@ -5,23 +5,29 @@ import TodoBuilder from './todoBuilder';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { getAllTasks, postTask } from '@/modules/data';
+import { useAuth } from '@clerk/nextjs';
 
 export default function TodoList({ done }) {
   const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { isLoaded, userId, getToken } = useAuth();
 
   useEffect(() => {
     async function getTasks() {
-      const data = await getAllTasks();
-      setTaskList(data);
-      setLoading(false);
+      if (userId) {
+        const token = await getToken({ template: 'codehooks' });
+        const data = await getAllTasks(token);
+        setTaskList(data);
+        setLoading(false);
+      }
     }
     getTasks();
-  }, []);
+  }, [isLoaded]);
 
   async function addTask(newTask) {
-    await postTask(newTask);
-    const data = await getAllTasks();
+    const token = await getToken({ template: 'codehooks' });
+    await postTask(token, newTask);
+    const data = await getAllTasks(token);
     setTaskList(data);
     setLoading(false);
   }

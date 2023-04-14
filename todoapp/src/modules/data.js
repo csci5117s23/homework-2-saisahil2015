@@ -1,37 +1,46 @@
 //Hub of all REST APIs
-const API_ENDPOINT = 'https://backend-sumc.api.codehooks.io/dev/toDo';
-const API_KEY = ' a80b0c50-8253-4977-b9ef-71122f66ff97';
+const API_ENDPOINT = 'https://backend-sumc.api.codehooks.io/dev';
 
-export async function getAllTasks() {
-  const response = await fetch(API_ENDPOINT, {
+export async function getAllTasks(authToken) {
+  const response = await fetch(API_ENDPOINT + '/toDo', {
     method: 'GET',
-    headers: { 'x-apikey': API_KEY, 'Content-Type': 'application/json' },
+    headers: {
+      Authorization: 'Bearer ' + authToken,
+      'Content-Type': 'application/json',
+    },
   });
-  const data = await response.json();
-  return data;
+  return await response.json();
 }
 
-export async function getTaskById(taskId) {
-  const response = await fetch(`${API_ENDPOINT}?_id=${taskId}`, {
+export async function getTaskById(authToken, taskId) {
+  const response = await fetch(`${API_ENDPOINT}/toDo/${taskId}`, {
     method: 'GET',
-    headers: { 'x-apikey': API_KEY, 'Content-Type': 'application/json' },
+    headers: {
+      Authorization: 'Bearer ' + authToken,
+      'Content-Type': 'application/json',
+    },
   });
-  const data = await response.json();
-  return data;
+  return await response.json();
 }
 
-export async function postTask(newTask) {
-  await fetch(API_ENDPOINT, {
+export async function postTask(authToken, newTask) {
+  await fetch(API_ENDPOINT + '/toDo', {
     method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + authToken,
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(newTask),
-    headers: { 'x-apikey': API_KEY, 'Content-Type': 'application/json' },
   });
 }
 
-export async function putTask(updatedTask) {
-  await fetch(API_ENDPOINT, {
+export async function putTask(authToken, updatedTask) {
+  await fetch(API_ENDPOINT + '/toDo/' + updatedTask.id, {
     method: 'PUT',
+    headers: {
+      Authorization: 'Bearer ' + authToken,
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(updatedTask),
-    headers: { 'x-apikey': API_KEY, 'Content-Type': 'application/json' },
   });
 }
