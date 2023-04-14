@@ -5,7 +5,16 @@ const API_KEY = ' a80b0c50-8253-4977-b9ef-71122f66ff97';
 export async function getAllTasks() {
   const response = await fetch(API_ENDPOINT, {
     method: 'GET',
-    headers: { 'x-apikey': API_KEY },
+    headers: { 'x-apikey': API_KEY, 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function getTaskById(taskId) {
+  const response = await fetch(`${API_ENDPOINT}?_id=${taskId}`, {
+    method: 'GET',
+    headers: { 'x-apikey': API_KEY, 'Content-Type': 'application/json' },
   });
   const data = await response.json();
   return data;
