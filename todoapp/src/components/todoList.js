@@ -4,36 +4,26 @@ import Button from './button';
 import TodoBuilder from './todoBuilder';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { getAllTasks, postTask } from '@/modules/data';
 
 export default function TodoList({ done }) {
-  const API_ENDPOINT = 'https://backend-sumc.api.codehooks.io/dev/toDo';
-  const API_KEY = ' a80b0c50-8253-4977-b9ef-71122f66ff97';
   const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    async function getTasks() {
+      const data = await getAllTasks();
+      setTaskList(data);
+      setLoading(false);
+    }
     getTasks();
   }, []);
 
-  async function getTasks() {
-    const response = await fetch(API_ENDPOINT, {
-      method: 'GET',
-      headers: { 'x-apikey': API_KEY },
-    });
-    const data = await response.json();
+  async function addTask(newTask) {
+    await postTask(newTask);
+    const data = await getAllTasks();
     setTaskList(data);
     setLoading(false);
-  }
-
-  async function addTask(newTask) {
-    console.log(newTask);
-    console.log(JSON.stringify(newTask));
-    await fetch(API_ENDPOINT, {
-      method: 'POST',
-      body: JSON.stringify(newTask),
-      headers: { 'x-apikey': API_KEY, 'Content-Type': 'application/json' },
-    });
-    getTasks();
   }
 
   const taskContent = done
