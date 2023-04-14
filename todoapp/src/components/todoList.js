@@ -1,5 +1,5 @@
 import Todo from './todo';
-import styles from '../styles/ToDoList.module.css';
+import styles from '../styles/TodoList.module.css';
 import Button from './button';
 import TodoBuilder from './todoBuilder';
 import Link from 'next/link';
