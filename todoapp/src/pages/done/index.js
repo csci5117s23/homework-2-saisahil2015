@@ -6,12 +6,6 @@ import TodoList from '@/components/todoList';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const TASKS = [
-  { info: 'Clean room', done: true },
-  { info: 'Pay bills', done: true },
-  { info: 'Code the homework', done: false },
-];
-
 export default function Home() {
   return (
     <>
@@ -21,7 +15,7 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <TodoList tasks={TASKS} done={true}></TodoList>
+      <TodoList done={true}></TodoList>
     </>
   );
 }

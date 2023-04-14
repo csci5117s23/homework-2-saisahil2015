@@ -8,7 +8,7 @@ export default function TodoBuilder({ addTask }) {
   function handleNewTask(e) {
     e.preventDefault();
     if (taskContent.trim().length === 0) return;
-    addTask({ info: taskContent.trim() });
+    addTask({ info: taskContent.trim(), checked: false });
     setTaskContent('');
   }
 

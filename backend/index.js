@@ -4,16 +4,12 @@
  */
 import { app } from 'codehooks-js';
 import { crudlify } from 'codehooks-crudlify';
-import { date, object, string } from 'yup';
+import { date, object, string, boolean } from 'yup';
 
 const todoYup = object({
   info: string().required(),
+  checked: boolean().required(),
   createdOn: date().default(() => new Date()),
-});
-
-// test route for https://<PROJECTID>.api.codehooks.io/dev/
-app.get('/test', (req, res) => {
-  res.json({ result: 'you did it!' });
 });
 
 // Use Crudlify to create a REST API for any collection

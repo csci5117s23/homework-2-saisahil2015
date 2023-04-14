@@ -40,12 +40,12 @@ export default function TodoList({ done }) {
     ? taskList
         .filter((task) => task.done)
         .map((task) => {
-          return <Todo key={task.info} info={task.info}></Todo>;
+          return <Todo key={task._id} todo={task}></Todo>;
         })
     : taskList
         .filter((task) => !task.done)
         .map((task) => {
-          return <Todo key={task.info} info={task.info}></Todo>;
+          return <Todo key={task._id} todo={task}></Todo>;
         });
 
   if (loading) {
