@@ -1,14 +1,31 @@
 //Hub of all REST APIs
 const API_ENDPOINT = 'https://backend-sumc.api.codehooks.io/dev';
 
-export async function getAllTasks(authToken) {
-  const response = await fetch(API_ENDPOINT + '/toDo', {
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer ' + authToken,
-      'Content-Type': 'application/json',
-    },
-  });
+export async function getAllUncheckedTasks(authToken) {
+  const response = await fetch(
+    API_ENDPOINT + '/toDo?checked=false&sort=-createdOn',
+    {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + authToken,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  return await response.json();
+}
+
+export async function getAllCheckedTasks(authToken) {
+  const response = await fetch(
+    API_ENDPOINT + '/toDo?checked=true&sort=-createdOn',
+    {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + authToken,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
   return await response.json();
 }
 
