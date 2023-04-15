@@ -51,13 +51,11 @@ export default function CategoryList({ manageCategory }) {
         {categories.map((category) => {
           console.log('Categories: ', category._id);
           return (
-            <Link href={`/todos/${category._id}`} key={category._id}>
-              <Category
-                key={category._id}
-                tag={category}
-                onChange={handleCategory}
-              />
-            </Link>
+            <Category
+              key={category._id}
+              tag={category}
+              onChange={handleCategory}
+            />
           );
         })}
       </div>

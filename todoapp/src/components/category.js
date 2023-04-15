@@ -7,7 +7,10 @@ import { useAuth } from '@clerk/nextjs';
 export default function Category({ tag, onChange }) {
   return (
     <div>
-      <p>{tag.tag}</p>
+      <Link href={`/todos/${tag._id}`} key={tag._id}>
+        {' '}
+        <p>{tag.tag}</p>
+      </Link>
       <input type='radio' name='categories' onClick={() => onChange(tag)} />
     </div>
   );

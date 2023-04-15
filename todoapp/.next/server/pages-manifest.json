@@ -4,5 +4,7 @@
   "/_document": "pages/_document.js",
   "/done/[category]": "pages/done/[category].js",
   "/todos": "pages/todos.js",
-  "/todo/[id]": "pages/todo/[id].js"
+  "/todo/[id]": "pages/todo/[id].js",
+  "/done": "pages/done.js",
+  "/todos/[category]": "pages/todos/[category].js"
 }
