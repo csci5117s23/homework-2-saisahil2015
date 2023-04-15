@@ -38,6 +38,7 @@ export default function TodoList({ done }) {
 
   async function addTask(newTask) {
     const token = await getToken({ template: 'codehooks' });
+    console.log('New Task: ', newTask);
     await postTask(token, newTask);
     const data = await getAllUncheckedTasks(token);
     setTaskList(data);
@@ -66,7 +67,6 @@ export default function TodoList({ done }) {
         <Link href='/todos'>
           <Button text='Incomplete Tasks'></Button>
         </Link>
-        <CategoryList />
       </div>
     ) : (
       <div className={styles.todoList}>
@@ -75,7 +75,6 @@ export default function TodoList({ done }) {
         <Link href='/done'>
           <Button text='Completed Tasks'></Button>
         </Link>
-        <CategoryList />
       </div>
     );
   }

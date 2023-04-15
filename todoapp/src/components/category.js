@@ -4,11 +4,11 @@ import { putTask } from '@/modules/data';
 import Link from 'next/link';
 import { useAuth } from '@clerk/nextjs';
 
-export default function Category({ tag }) {
-  console.log('Tag information: ', tag);
+export default function Category({ tag, onChange }) {
   return (
     <div>
       <p>{tag.tag}</p>
+      <input type='radio' name='categories' onClick={() => onChange(tag)} />
     </div>
   );
 }

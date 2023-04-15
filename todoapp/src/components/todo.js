@@ -13,6 +13,7 @@ export default function Todo({ todo, onChange }) {
       info: todo.info,
       checked: true,
       userId: todo.userId,
+      category: todo.category,
       createdOn: todo.createdOn,
     };
     console.log("Here's the new task: ", updatedTask);
@@ -28,7 +29,7 @@ export default function Todo({ todo, onChange }) {
     <div className={styles.todo}>
       {shortInfo}
       <label>
-        <input type='checkbox' checked />
+        <input type='checkbox' checked readOnly />
       </label>
     </div>
   ) : (

@@ -9,7 +9,7 @@ import { useAuth } from '@clerk/nextjs';
 import CategoryBuilder from './categoryBuilder';
 import Category from './category';
 
-export default function CategoryList() {
+export default function CategoryList({ manageCategory }) {
   const { isLoaded, userId, getToken } = useAuth();
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
@@ -38,6 +38,10 @@ export default function CategoryList() {
     getCategories();
   }, [isLoaded]);
 
+  function handleCategory(tag) {
+    manageCategory(tag);
+  }
+
   if (loading) {
     return <span>Loading ...</span>;
   } else {
@@ -45,7 +49,11 @@ export default function CategoryList() {
       <div>
         <CategoryBuilder addCategory={addCategory} />
         {categories.map((category) => (
-          <Category key={category._id} tag={category} />
+          <Category
+            key={category._id}
+            tag={category}
+            onChange={handleCategory}
+          />
         ))}
       </div>
     );
