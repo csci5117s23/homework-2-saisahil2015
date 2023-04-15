@@ -4,7 +4,7 @@ import { putTask } from '@/modules/data';
 import Link from 'next/link';
 import { useAuth } from '@clerk/nextjs';
 
-export default function Todo({ todo, checked, onChange }) {
+export default function Todo({ todo, onChange }) {
   const { getToken } = useAuth();
 
   async function handleCheck(todo) {
@@ -21,16 +21,19 @@ export default function Todo({ todo, checked, onChange }) {
     onChange();
   }
 
-  return checked ? (
+  const shortInfo =
+    todo.info.length > 10 ? `${todo.info.substring(0, 10)}...` : todo.info;
+
+  return todo.checked ? (
     <div className={styles.todo}>
-      {info}
+      {shortInfo}
       <label>
         <input type='checkbox' checked />
       </label>
     </div>
   ) : (
     <div className={styles.todo}>
-      <Link href={`/todo/${todo._id}`}>{todo.info}</Link>
+      <Link href={`/todo/${todo._id}`}>{shortInfo}</Link>
       <label>
         <input
           type='checkbox'
