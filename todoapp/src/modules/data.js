@@ -61,3 +61,22 @@ export async function putTask(authToken, updatedTask) {
     body: JSON.stringify(updatedTask),
   });
 }
+
+export async function getAllCategories(authToken) {
+  const response = await fetch(API_ENDPOINT + '/categories/', {
+    method: 'GET',
+    headers: { Authorization: 'Bearer ' + authToken },
+  });
+  return await response.json();
+}
+
+export async function postCategory(authToken, newCategory) {
+  await fetch(API_ENDPOINT + '/categories', {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + authToken,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newCategory),
+  });
+}

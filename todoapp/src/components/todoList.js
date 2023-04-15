@@ -10,6 +10,7 @@ import {
   postTask,
 } from '@/modules/data';
 import { useAuth } from '@clerk/nextjs';
+import CategoryList from './categoryList';
 
 export default function TodoList({ done }) {
   const [taskList, setTaskList] = useState([]);
@@ -65,6 +66,7 @@ export default function TodoList({ done }) {
         <Link href='/todos'>
           <Button text='Incomplete Tasks'></Button>
         </Link>
+        <CategoryList />
       </div>
     ) : (
       <div className={styles.todoList}>
@@ -73,6 +75,7 @@ export default function TodoList({ done }) {
         <Link href='/done'>
           <Button text='Completed Tasks'></Button>
         </Link>
+        <CategoryList />
       </div>
     );
   }

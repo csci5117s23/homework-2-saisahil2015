@@ -39,6 +39,23 @@ app.use('/toDo', (req, res, next) => {
   }
   next();
 });
+
+// some extra logic for GET / and POST / requests.
+app.use('/categories', (req, res, next) => {
+  if (req.method === 'POST') {
+    // always save authenticating user Id token.
+    // note -- were not enforcing uniqueness which isn't great.
+    // we don't currently have a great way to do this -- one option would be to
+    // have a user collection track which collections have been filled
+    // It's a limitation for sure, but I'll just make that a front-end problem...
+    req.body.userId = req.user_token.sub;
+  } else if (req.method === 'GET') {
+    // on "index" -- always check for authentication.
+    req.query.userId = req.user_token.sub;
+  }
+  next();
+});
+
 // some extra logic for GET /id and PUT /id DELETE /id PATCH /id requests.
 // side effect here will break patch patch by query, but that's OK for my purposes.
 app.use('/toDo/?id=', async (req, res, next) => {
@@ -48,7 +65,30 @@ app.use('/toDo/?id=', async (req, res, next) => {
   const conn = await Datastore.open();
   try {
     console.log(id);
-    const doc = await conn.getOne('pres', id);
+    const doc = await conn.getOne('toDo', id);
+    if (doc.userId != userId) {
+      // authenticate duser doesn't own this document.
+      res.status(403).end(); // end is like "quit this request"
+      return;
+    }
+  } catch (e) {
+    console.log(e);
+    // the document doesn't exist.
+    res.status(404).end(e);
+    return;
+  }
+  // if we don't crash out -- call next and let crudlify deal with the details...
+  next();
+});
+
+app.use('/categories/?id=', async (req, res, next) => {
+  const id = req.params.ID;
+  const userId = req.user_token.sub;
+  // let's check access rights for the document being read/updated/replaced/deleted
+  const conn = await Datastore.open();
+  try {
+    console.log(id);
+    const doc = await conn.getOne('categories', id);
     if (doc.userId != userId) {
       // authenticate duser doesn't own this document.
       res.status(403).end(); // end is like "quit this request"
@@ -68,10 +108,15 @@ const todoYup = object({
   info: string().required(),
   checked: boolean().required(),
   createdOn: date().default(() => new Date()),
+  category: string().required(),
+});
+
+const categoryYup = object({
+  tag: string().required(),
 });
 
 // Use Crudlify to create a REST API for any collection
-crudlify(app, { toDo: todoYup });
+crudlify(app, { toDo: todoYup, categories: categoryYup });
 
 // bind to serverless runtime
 export default app.init();
