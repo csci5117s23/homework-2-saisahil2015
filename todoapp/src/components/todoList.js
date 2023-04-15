@@ -70,7 +70,7 @@ export default function TodoList({ done }) {
       </div>
     ) : (
       <div className={styles.todoList}>
-        <TodoBuilder addTask={addTask} />
+        <TodoBuilder addTask={addTask} needToAddCategory={true} />
         {taskContent}
         <Link href='/done'>
           <Button text='Completed Tasks'></Button>

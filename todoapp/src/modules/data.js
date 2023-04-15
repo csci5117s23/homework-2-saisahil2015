@@ -94,7 +94,7 @@ export async function getCategoryById(authToken, categoryId) {
 
 export async function getIncompleteTasksForCategory(authToken, category) {
   const response = await fetch(
-    `${API_ENDPOINT}/toDo?category=${category}&checked=false`,
+    `${API_ENDPOINT}/toDo?category=${category}&checked=false&sort=-createdOn`,
     {
       method: 'GET',
       headers: {
@@ -108,7 +108,7 @@ export async function getIncompleteTasksForCategory(authToken, category) {
 
 export async function getCompleteTasksForCategory(authToken, category) {
   const response = await fetch(
-    `${API_ENDPOINT}/toDo?category=${category}&checked=true`,
+    `${API_ENDPOINT}/toDo?category=${category}&checked=true&sort=-createdOn`,
     {
       method: 'GET',
       headers: {

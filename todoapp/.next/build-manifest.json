@@ -30,15 +30,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/done/[category].js"
     ],
+    "/todo/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/todo/[id].js"
+    ],
     "/todos": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/todos.js"
-    ],
-    "/todos/[category]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/todos/[category].js"
     ]
   },
   "ampFirstPages": []

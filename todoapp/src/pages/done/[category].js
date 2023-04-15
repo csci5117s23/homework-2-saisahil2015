@@ -18,7 +18,7 @@ export default function IncompleteTasksWithCategoris() {
   console.log('Router info: ', router);
   const { category } = router.query;
   const [loading, setLoading] = useState(true);
-  const [categoryName, setCategory] = useState(null);
+  const [categoryTag, setCategoryTag] = useState(null);
   const [taskList, setTaskList] = useState([]);
   const { isLoaded, userId, getToken } = useAuth();
 
@@ -27,14 +27,13 @@ export default function IncompleteTasksWithCategoris() {
       if (userId) {
         console.log('categoryId: ', category);
         const token = await getToken({ template: 'codehooks' });
-        const categoryInfo = await getCategoryById(token, category);
-        setCategory(categoryInfo.tag);
+        const categoryName = await getCategoryById(token, category);
         const completeTasksForCategory = await getCompleteTasksForCategory(
           token,
-          categoryName
+          categoryName.tag
         );
-        console.log('Category Name: ', categoryName);
-        console.log('incompleteTasksForCategory: ', completeTasksForCategory);
+        setCategoryTag(categoryName.tag);
+        console.log('completeTasksForCategory: ', completeTasksForCategory);
         setTaskList(completeTasksForCategory);
         setLoading(false);
       }
@@ -42,37 +41,11 @@ export default function IncompleteTasksWithCategoris() {
     getTask();
   }, [isLoaded]);
 
-  function handleInputChange(e) {
-    const { name, value } = e.target;
-    setTodoItemInfo({ ...todoItemInfo, [name]: value });
-    console.log('Check: ', todoItemInfo);
-  }
-  async function editTask() {
-    const token = await getToken({ template: 'codehooks' });
-    console.log('TodoItem: ', todoItemInfo);
-    await putTask(token, todoItemInfo);
-  }
-
-  async function handleCheck() {
-    const todo = { ...todoItemInfo };
-    const updatedTask = {
-      _id: todo._id,
-      info: todo.info,
-      checked: true,
-      userId: todo.userId,
-      createdOn: todo.createdOn,
-    };
-    console.log("Here's the new task: ", updatedTask);
-    const token = await getToken({ template: 'codehooks' });
-    await putTask(token, updatedTask);
-    router.push('/done');
-  }
-
   return loading ? (
     <span>Loading...</span>
   ) : (
-    <div>
-      {categoryName}
+    <div className={styles.todoList}>
+      {categoryTag}
       {taskList.map((task) => {
         return <Todo key={task._id} todo={task}></Todo>;
       })}

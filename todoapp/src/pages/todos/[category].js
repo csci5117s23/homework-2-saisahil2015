@@ -5,76 +5,72 @@ import {
   putTask,
   getCategoryById,
   getIncompleteTasksForCategory,
+  postTask,
 } from '@/modules/data';
 import { useAuth } from '@clerk/nextjs';
 import Button from '@/components/button';
 import Link from 'next/link';
 import Todo from '@/components/todo';
 import styles from '@/styles/TodoList.module.css';
+import TodoBuilder from '@/components/todoBuilder';
 
 export default function IncompleteTasksWithCategoris() {
   const router = useRouter();
   console.log('Router info: ', router);
   const { category } = router.query;
   const [loading, setLoading] = useState(true);
-  const [categoryName, setCategory] = useState(null);
+  const [categoryTag, setCategoryTag] = useState(null);
   const [taskList, setTaskList] = useState([]);
   const { isLoaded, userId, getToken } = useAuth();
 
+  async function fetchIncompleteTasksForCategory() {
+    const token = await getToken({ template: 'codehooks' });
+    console.log('Category check: ', category);
+    const categoryName = await getCategoryById(token, category);
+    // setCategory(categoryInfo.tag);
+    console.log('Hello');
+    const incompleteTasksForCategory = await getIncompleteTasksForCategory(
+      token,
+      categoryName.tag
+    );
+    setCategoryTag(categoryName.tag);
+    console.log('Category Name Checkinggg: ', categoryName);
+    console.log('incompleteTasksForCategory: ', incompleteTasksForCategory);
+    setTaskList(incompleteTasksForCategory);
+    setLoading(false);
+  }
+
   useEffect(() => {
-    async function getTask() {
-      if (userId) {
-        console.log('categoryId: ', category);
-        const token = await getToken({ template: 'codehooks' });
-        const categoryInfo = await getCategoryById(token, category);
-        setCategory(categoryInfo.tag);
-        const incompleteTasksForCategory = await getIncompleteTasksForCategory(
-          token,
-          categoryName
-        );
-        console.log('Category Name: ', categoryName);
-        console.log('incompleteTasksForCategory: ', incompleteTasksForCategory);
-        setTaskList(incompleteTasksForCategory);
-        setLoading(false);
-      }
-    }
-    getTask();
+    fetchIncompleteTasksForCategory();
   }, [isLoaded]);
 
-  function handleInputChange(e) {
-    const { name, value } = e.target;
-    setTodoItemInfo({ ...todoItemInfo, [name]: value });
-    console.log('Check: ', todoItemInfo);
-  }
-  async function editTask() {
+  async function addTask(newTask) {
     const token = await getToken({ template: 'codehooks' });
-    console.log('TodoItem: ', todoItemInfo);
-    await putTask(token, todoItemInfo);
-  }
-
-  async function handleCheck() {
-    const todo = { ...todoItemInfo };
-    const updatedTask = {
-      _id: todo._id,
-      info: todo.info,
-      checked: true,
-      userId: todo.userId,
-      createdOn: todo.createdOn,
-    };
-    console.log("Here's the new task: ", updatedTask);
-    const token = await getToken({ template: 'codehooks' });
-    await putTask(token, updatedTask);
-    router.push('/done');
+    console.log('New Task: ', newTask);
+    await postTask(token, newTask);
+    fetchIncompleteTasksForCategory();
   }
 
   return loading ? (
     <span>Loading...</span>
   ) : (
-    <div>
-      {categoryName}
+    <div className={styles.todoList}>
+      {categoryTag}
+      {console.log('Tasklist: ', taskList)}
       {taskList.map((task) => {
-        return <Todo key={task._id} todo={task}></Todo>;
+        return (
+          <Todo
+            key={task._id}
+            todo={task}
+            onChange={fetchIncompleteTasksForCategory}
+          ></Todo>
+        );
       })}
+      <TodoBuilder
+        addTask={addTask}
+        needToAddCategory={false}
+        sentCategory={categoryTag}
+      ></TodoBuilder>
     </div>
   );
 }

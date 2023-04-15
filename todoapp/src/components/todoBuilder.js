@@ -3,18 +3,32 @@ import Button from './button';
 import { useState } from 'react';
 import CategoryList from './categoryList';
 
-export default function TodoBuilder({ addTask }) {
+export default function TodoBuilder({
+  addTask,
+  needToAddCategory,
+  sentCategory,
+}) {
   const [taskContent, setTaskContent] = useState('');
   const [category, setCategory] = useState('');
 
   async function handleNewTask(e) {
     e.preventDefault();
     if (taskContent.trim().length === 0) return;
-    await addTask({
-      info: taskContent.trim(),
-      checked: false,
-      category: category.tag,
-    });
+    if (needToAddCategory) {
+      await addTask({
+        info: taskContent.trim(),
+        checked: false,
+        category: category.tag,
+      });
+    } else {
+      console.log('Value: ', sentCategory);
+      await addTask({
+        info: taskContent.trim(),
+        checked: false,
+        category: sentCategory,
+      });
+    }
+
     setTaskContent('');
   }
 
@@ -22,7 +36,7 @@ export default function TodoBuilder({ addTask }) {
     setCategory(category);
   }
 
-  return (
+  return needToAddCategory ? (
     <div>
       <form onSubmit={handleNewTask}>
         <input
@@ -34,6 +48,18 @@ export default function TodoBuilder({ addTask }) {
         <Button text='Add Task'></Button>
       </form>
       <CategoryList manageCategory={handleTaskAndCategory} />
+    </div>
+  ) : (
+    <div>
+      <form onSubmit={handleNewTask}>
+        <input
+          type='text'
+          placeholder='Add a New Task'
+          onChange={(e) => setTaskContent(e.target.value)}
+          className={styles.newTaskInput}
+        />
+        <Button text='Add Task'></Button>
+      </form>
     </div>
   );
 }
