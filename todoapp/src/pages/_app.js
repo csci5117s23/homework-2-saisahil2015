@@ -26,5 +26,4 @@ export default function App({ Component, pageProps }) {
       )}
     </ClerkProvider>
   );
-  // return <Component {...pageProps} />;
 }
