@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getTaskById } from '@/modules/data';
+import { getTaskById, putTask } from '@/modules/data';
 import { useAuth } from '@clerk/nextjs';
+import Button from '@/components/button';
 
 export default function TodoItem() {
   const router = useRouter();
@@ -24,5 +25,27 @@ export default function TodoItem() {
     getTask();
   }, [isLoaded]);
 
-  return loading ? <span>Loading...</span> : <div>{todoItemInfo.info}</div>;
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setTodoItemInfo({ ...todoItemInfo, [name]: value });
+    console.log('Check: ', todoItemInfo);
+  }
+  async function editTask() {
+    const token = await getToken({ template: 'codehooks' });
+    console.log('TodoItem: ', todoItemInfo);
+    await putTask(token, todoItemInfo);
+  }
+
+  return loading ? (
+    <span>Loading...</span>
+  ) : (
+    <div>
+      <input
+        name='info'
+        value={todoItemInfo.info}
+        onChange={handleInputChange}
+      />
+      <Button text='Edit' onChange={editTask}></Button>
+    </div>
+  );
 }

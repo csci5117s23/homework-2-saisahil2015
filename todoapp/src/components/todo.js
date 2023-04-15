@@ -9,7 +9,7 @@ export default function Todo({ todo, checked, onChange }) {
 
   async function handleCheck(todo) {
     const updatedTask = {
-      id: todo._id,
+      _id: todo._id,
       info: todo.info,
       checked: true,
       userId: todo.userId,

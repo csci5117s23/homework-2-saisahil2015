@@ -52,7 +52,7 @@ export async function postTask(authToken, newTask) {
 }
 
 export async function putTask(authToken, updatedTask) {
-  await fetch(API_ENDPOINT + '/toDo/' + updatedTask.id, {
+  await fetch(API_ENDPOINT + '/toDo/' + updatedTask._id, {
     method: 'PUT',
     headers: {
       Authorization: 'Bearer ' + authToken,
