@@ -25,10 +25,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/todo/[id]": [
+    "/done/[category]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/todo/[id].js"
+      "static/chunks/pages/done/[category].js"
+    ],
+    "/todos": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/todos.js"
+    ],
+    "/todos/[category]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/todos/[category].js"
     ]
   },
   "ampFirstPages": []

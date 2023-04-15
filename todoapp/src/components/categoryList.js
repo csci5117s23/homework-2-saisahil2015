@@ -19,7 +19,7 @@ export default function CategoryList({ manageCategory }) {
       const token = await getToken({ template: 'codehooks' });
       const data = await getAllCategories(token);
       console.log('Data: ', data);
-      console.log('Categories data  check: ', data);
+      console.log('Categories data check: ', data);
       setCategories(data);
       setLoading(false);
     }
@@ -48,13 +48,18 @@ export default function CategoryList({ manageCategory }) {
     return (
       <div>
         <CategoryBuilder addCategory={addCategory} />
-        {categories.map((category) => (
-          <Category
-            key={category._id}
-            tag={category}
-            onChange={handleCategory}
-          />
-        ))}
+        {categories.map((category) => {
+          console.log('Categories: ', category._id);
+          return (
+            <Link href={`/todos/${category._id}`} key={category._id}>
+              <Category
+                key={category._id}
+                tag={category}
+                onChange={handleCategory}
+              />
+            </Link>
+          );
+        })}
       </div>
     );
   }

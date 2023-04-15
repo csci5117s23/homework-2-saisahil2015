@@ -80,3 +80,42 @@ export async function postCategory(authToken, newCategory) {
     body: JSON.stringify(newCategory),
   });
 }
+
+export async function getCategoryById(authToken, categoryId) {
+  const response = await fetch(`${API_ENDPOINT}/categories/${categoryId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + authToken,
+      'Content-Type': 'application/json',
+    },
+  });
+  return await response.json();
+}
+
+export async function getIncompleteTasksForCategory(authToken, category) {
+  const response = await fetch(
+    `${API_ENDPOINT}/toDo?category=${category}&checked=false`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + authToken,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  return await response.json();
+}
+
+export async function getCompleteTasksForCategory(authToken, category) {
+  const response = await fetch(
+    `${API_ENDPOINT}/toDo?category=${category}&checked=true`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + authToken,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  return await response.json();
+}
