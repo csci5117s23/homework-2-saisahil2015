@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { getTaskById, putTask } from '@/modules/data';
 import { useAuth } from '@clerk/nextjs';
 import Button from '@/components/button';
+import Link from 'next/link';
 
 export default function TodoItem() {
   const router = useRouter();
@@ -62,6 +63,7 @@ export default function TodoItem() {
       />
       <Button text='Save' onChange={editTask}></Button>
       <input type='checkbox' onClick={handleCheck} />
+      <Link href='/todos'>Check out the remaining tasks</Link>
     </div>
   );
 }
