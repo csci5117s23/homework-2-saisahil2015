@@ -3,7 +3,7 @@ import Button from './button';
 import { useState } from 'react';
 import { useAuth } from '@clerk/nextjs';
 
-export default function CategoryBuilder({ addCategory }) {
+export default function CategoryBuilder({ addCategory, deleteCategory }) {
   const [categoryName, setCategoryName] = useState('');
 
   async function handleNewCategory() {
@@ -21,6 +21,7 @@ export default function CategoryBuilder({ addCategory }) {
         className={styles.newTaskInput}
       />
       <Button text='Add Category' onChange={handleNewCategory}></Button>
+      <Button text='Delete Category' onChange={deleteCategory}></Button>
     </div>
   );
 }

@@ -119,3 +119,14 @@ export async function getCompleteTasksForCategory(authToken, category) {
   );
   return await response.json();
 }
+
+export async function deleteCategoryById(authToken, categoryId) {
+  const response = await fetch(`${API_ENDPOINT}/categories/${categoryId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Bearer ' + authToken,
+      'Content-Type': 'application/json',
+    },
+  });
+  return await response.json();
+}

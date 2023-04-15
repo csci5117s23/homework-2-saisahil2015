@@ -1,10 +1,6 @@
 {
-  "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/done": "pages/done.js",
-  "/todo/[id]": "pages/todo/[id].js",
-  "/todos": "pages/todos.js",
-  "/todos/[category]": "pages/todos/[category].js",
-  "/done/[category]": "pages/done/[category].js"
+  "/_app": "pages/_app.js",
+  "/todos": "pages/todos.js"
 }
