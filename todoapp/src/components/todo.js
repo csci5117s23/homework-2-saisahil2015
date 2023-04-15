@@ -4,7 +4,7 @@ import { putTask } from '@/modules/data';
 import Link from 'next/link';
 import { useAuth } from '@clerk/nextjs';
 
-export default function Todo({ todo, checked }) {
+export default function Todo({ todo, checked, onChange }) {
   const { getToken } = useAuth();
 
   async function handleCheck(todo) {
@@ -12,11 +12,13 @@ export default function Todo({ todo, checked }) {
       id: todo._id,
       info: todo.info,
       checked: true,
+      userId: todo.userId,
       createdOn: todo.createdOn,
     };
     console.log("Here's the new task: ", updatedTask);
     const token = await getToken({ template: 'codehooks' });
     await putTask(token, updatedTask);
+    onChange();
   }
 
   return checked ? (

@@ -30,6 +30,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/done.js"
     ],
+    "/todo/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/todo/[id].js"
+    ],
     "/todos": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

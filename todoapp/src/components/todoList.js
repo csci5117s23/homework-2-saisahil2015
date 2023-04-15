@@ -17,20 +17,21 @@ export default function TodoList({ done }) {
   const { isLoaded, userId, getToken } = useAuth();
   let data = [];
 
-  useEffect(() => {
-    async function getTasks() {
-      if (userId) {
-        const token = await getToken({ template: 'codehooks' });
-        if (done) {
-          data = await getAllCheckedTasks(token);
-        } else {
-          data = await getAllUncheckedTasks(token);
-        }
-        console.log('Data: ', data);
-        setTaskList(data);
-        setLoading(false);
+  async function getTasks() {
+    if (userId) {
+      const token = await getToken({ template: 'codehooks' });
+      if (done) {
+        data = await getAllCheckedTasks(token);
+      } else {
+        data = await getAllUncheckedTasks(token);
       }
+      console.log('Data: ', data);
+      setTaskList(data);
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     getTasks();
   }, [isLoaded]);
 
@@ -52,7 +53,7 @@ export default function TodoList({ done }) {
     : taskList
         .filter((task) => !task.checked)
         .map((task) => {
-          return <Todo key={task._id} todo={task}></Todo>;
+          return <Todo key={task._id} todo={task} onChange={getTasks}></Todo>;
         });
 
   if (loading) {
