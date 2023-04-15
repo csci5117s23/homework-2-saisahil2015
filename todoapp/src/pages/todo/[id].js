@@ -36,6 +36,21 @@ export default function TodoItem() {
     await putTask(token, todoItemInfo);
   }
 
+  async function handleCheck() {
+    const todo = { ...todoItemInfo };
+    const updatedTask = {
+      _id: todo._id,
+      info: todo.info,
+      checked: true,
+      userId: todo.userId,
+      createdOn: todo.createdOn,
+    };
+    console.log("Here's the new task: ", updatedTask);
+    const token = await getToken({ template: 'codehooks' });
+    await putTask(token, updatedTask);
+    router.push('/done');
+  }
+
   return loading ? (
     <span>Loading...</span>
   ) : (
@@ -45,7 +60,8 @@ export default function TodoItem() {
         value={todoItemInfo.info}
         onChange={handleInputChange}
       />
-      <Button text='Edit' onChange={editTask}></Button>
+      <Button text='Save' onChange={editTask}></Button>
+      <input type='checkbox' onClick={handleCheck} />
     </div>
   );
 }
