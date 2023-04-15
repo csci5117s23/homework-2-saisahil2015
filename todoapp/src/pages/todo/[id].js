@@ -44,6 +44,7 @@ export default function TodoItem() {
       info: todo.info,
       checked: true,
       userId: todo.userId,
+      category: todo.category,
       createdOn: todo.createdOn,
     };
     console.log("Here's the new task: ", updatedTask);
