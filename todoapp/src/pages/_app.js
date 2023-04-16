@@ -1,6 +1,13 @@
 import '@/styles/globals.css';
+import styles from '@/styles/Home.module.css';
 import { useRouter } from 'next/router';
-import { ClerkProvider, SignedIn, SignIn, SignedOut } from '@clerk/nextjs';
+import {
+  ClerkProvider,
+  SignedIn,
+  SignIn,
+  SignedOut,
+  SignInButton,
+} from '@clerk/nextjs';
 
 const publicPages = ['/'];
 
@@ -14,15 +21,14 @@ export default function App({ Component, pageProps }) {
       {isPublicPage ? (
         <Component {...pageProps} />
       ) : (
-        <>
+        <div className={styles.container}>
           <SignedIn>
             <Component {...pageProps} />
           </SignedIn>
           <SignedOut>
-            <SignIn></SignIn>
             <Component {...pageProps} />
           </SignedOut>
-        </>
+        </div>
       )}
     </ClerkProvider>
   );

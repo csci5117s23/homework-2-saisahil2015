@@ -2,8 +2,15 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import styles from '@/styles/Home.module.css';
-import { SignedIn, SignedOut, SignIn, useAuth } from '@clerk/nextjs';
+import {
+  SignedOut,
+  SignUpButton,
+  SignInButton,
+  useAuth,
+  SignedIn,
+} from '@clerk/nextjs';
 import { useRouter } from 'next/router';
+import Button from '@/components/button';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,14 +40,45 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <section className='section'>
-        <div className='container'>
-          <h1 className='title'>Sahil's Todolist</h1>
-          <p className='subtitle'>
-            My first website with <strong>Bulma</strong>!
-          </p>
-        </div>
-      </section>
+      <SignedOut>
+        <section className={styles.main}>
+          <div className={styles.container}>
+            <h1 className='title'>Sahil's Todolist</h1>
+            <p className='subtitle'>
+              Welcome to my <strong>TodoList</strong> site!
+              <br></br>
+              The site offers a variet of features from having a personalized
+              <br></br>
+              profile to adding and completing tasks with relevant categories
+            </p>
+            <span className={styles.button}>
+              <SignInButton className='button is-dark'></SignInButton>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <SignUpButton className='button is-dark'></SignUpButton>
+            </span>
+          </div>
+        </section>
+      </SignedOut>
+
+      <SignedIn>
+        <section className={styles.main}>
+          <div className={styles.container}>
+            <h1 className='title'>Sahil's Todolist</h1>
+            <p className='subtitle'>
+              Welcome to my <strong>TodoList</strong> site!
+              <br></br>
+              The site offers a variety of features from having a personalized
+              <br></br>
+              profile to adding and completing tasks with relevant categories
+            </p>
+            <span className={styles.button}>
+              <Button text='Todos' onChange={() => router.push('/todos')} />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button text='Done' onChange={() => router.push('/done')} />
+            </span>
+          </div>
+        </section>
+      </SignedIn>
     </>
   );
 }
