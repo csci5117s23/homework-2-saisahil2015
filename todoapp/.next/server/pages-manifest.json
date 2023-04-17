@@ -3,6 +3,8 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/todos": "pages/todos.js",
+  "/done/[category]": "pages/done/[category].js",
   "/todos/[category]": "pages/todos/[category].js",
-  "/done/[category]": "pages/done/[category].js"
+  "/todo/[id]": "pages/todo/[id].js",
+  "/done": "pages/done.js"
 }

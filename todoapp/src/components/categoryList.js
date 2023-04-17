@@ -67,16 +67,24 @@ export default function CategoryList({ manageCategory }) {
           addCategory={addCategory}
           deleteCategory={deleteCategory}
         />
-        {categories.map((category) => {
-          console.log('Categories: ', category._id);
-          return (
-            <Category
-              key={category._id}
-              tag={category}
-              onChange={handleCategory}
-            />
-          );
-        })}
+        <h1 className='subtitle' style={{ width: '55%', marginTop: '2rem' }}>
+          <strong>
+            Select from a category below to either tag it with the task or to
+            delete the category itself:
+          </strong>
+        </h1>
+        <div className='columns' style={{ marginBottom: '2rem' }}>
+          {categories.map((category) => {
+            console.log('Categories: ', category._id);
+            return (
+              <Category
+                key={category._id}
+                tag={category}
+                onChange={handleCategory}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }

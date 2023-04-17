@@ -20,8 +20,18 @@ export default function CategoryBuilder({ addCategory, deleteCategory }) {
         onChange={(e) => setCategoryName(e.target.value)}
         className={styles.newTaskInput}
       />
-      <Button text='Add Category' onChange={handleNewCategory}></Button>
-      <Button text='Delete Category' onChange={deleteCategory}></Button>
+      <div className='columns'>
+        <div className='column is-one-quarter'>
+          <Button text='Add Category' onChange={handleNewCategory}></Button>
+        </div>
+        <div className='column' style={{ marginTop: '0.5rem' }}>
+          <Button
+            text='Delete Category'
+            onChange={deleteCategory}
+            deleteClass={true}
+          ></Button>
+        </div>
+      </div>
     </div>
   );
 }

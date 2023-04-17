@@ -47,7 +47,7 @@ export default function TodoBuilder({
         />
         <Button text='Add Task'></Button>
       </form>
-      <CategoryList manageCategory={handleTaskAndCategory} />
+      <CategoryList manageCategory={handleTaskAndCategory} addClass={true} />
     </div>
   ) : (
     <div>

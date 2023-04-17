@@ -52,9 +52,9 @@ export default function Home() {
               profile to adding and completing tasks with relevant categories
             </p>
             <span className={styles.button}>
-              <SignInButton className='button is-dark'></SignInButton>
+              <SignInButton className='button is-link'></SignInButton>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <SignUpButton className='button is-dark'></SignUpButton>
+              <SignUpButton className='button is-link'></SignUpButton>
             </span>
           </div>
         </section>
