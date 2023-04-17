@@ -67,10 +67,10 @@ export default function CategoryList({ manageCategory }) {
           addCategory={addCategory}
           deleteCategory={deleteCategory}
         />
-        <h1 className='subtitle' style={{ width: '55%', marginTop: '2rem' }}>
+        <h1 className='subtitle' style={{ width: '70%', marginTop: '2rem' }}>
           <strong>
-            Select from a category below to either tag it with the task or to
-            delete the category itself:
+            Create a new Category or Select from a category below to either tag
+            it with the task or to delete the category itself:
           </strong>
         </h1>
         <div className='columns' style={{ marginBottom: '2rem' }}>
