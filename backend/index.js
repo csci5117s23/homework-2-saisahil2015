@@ -64,7 +64,7 @@ app.use('/toDo/?id=', async (req, res, next) => {
   // let's check access rights for the document being read/updated/replaced/deleted
   const conn = await Datastore.open();
   try {
-    console.log(id);
+    // console.log(id);
     const doc = await conn.getOne('toDo', id);
     if (doc.userId != userId) {
       // authenticate duser doesn't own this document.
@@ -72,7 +72,7 @@ app.use('/toDo/?id=', async (req, res, next) => {
       return;
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     // the document doesn't exist.
     res.status(404).end(e);
     return;
@@ -87,7 +87,7 @@ app.use('/categories/?id=', async (req, res, next) => {
   // let's check access rights for the document being read/updated/replaced/deleted
   const conn = await Datastore.open();
   try {
-    console.log(id);
+    // console.log(id);
     const doc = await conn.getOne('categories', id);
     if (doc.userId != userId) {
       // authenticate duser doesn't own this document.
@@ -95,7 +95,7 @@ app.use('/categories/?id=', async (req, res, next) => {
       return;
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     // the document doesn't exist.
     res.status(404).end(e);
     return;

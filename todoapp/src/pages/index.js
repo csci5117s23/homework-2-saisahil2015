@@ -47,7 +47,7 @@ export default function Home() {
             <p className='subtitle'>
               Welcome to my <strong>TodoList</strong> site!
               <br></br>
-              The site offers a variet of features from having a personalized
+              The site offers a variety of features from having a personalized
               <br></br>
               profile to adding and completing tasks with relevant categories
             </p>

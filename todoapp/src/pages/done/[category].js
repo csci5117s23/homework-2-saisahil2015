@@ -15,7 +15,7 @@ import styles from '@/styles/TodoList.module.css';
 
 export default function IncompleteTasksWithCategoris() {
   const router = useRouter();
-  console.log('Router info: ', router);
+  // console.log('Router info: ', router);
   const { category } = router.query;
   const [loading, setLoading] = useState(true);
   const [categoryTag, setCategoryTag] = useState(null);
@@ -25,7 +25,7 @@ export default function IncompleteTasksWithCategoris() {
   useEffect(() => {
     async function getTask() {
       if (userId) {
-        console.log('categoryId: ', category);
+        // console.log('categoryId: ', category);
         const token = await getToken({ template: 'codehooks' });
         const categoryName = await getCategoryById(token, category);
         const completeTasksForCategory = await getCompleteTasksForCategory(
@@ -33,7 +33,7 @@ export default function IncompleteTasksWithCategoris() {
           categoryName.tag
         );
         setCategoryTag(categoryName.tag);
-        console.log('completeTasksForCategory: ', completeTasksForCategory);
+        // console.log('completeTasksForCategory: ', completeTasksForCategory);
         setTaskList(completeTasksForCategory);
         setLoading(false);
       }
