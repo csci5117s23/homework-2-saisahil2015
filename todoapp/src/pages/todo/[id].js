@@ -4,6 +4,7 @@ import { getTaskById, putTask } from '@/modules/data';
 import { useAuth } from '@clerk/nextjs';
 import Button from '@/components/button';
 import Link from 'next/link';
+import styles from '@/styles/TodoList.module.css';
 
 export default function TodoItem() {
   const router = useRouter();
@@ -56,15 +57,23 @@ export default function TodoItem() {
   return loading ? (
     <span>Loading...</span>
   ) : (
-    <div>
+    <div className={styles.todoList}>
+      <h1 className='subtitle'>
+        <strong>
+          Instructions: Edit the task here or complete it by checking the box
+        </strong>
+      </h1>
       <input
         name='info'
         value={todoItemInfo.info}
         onChange={handleInputChange}
       />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <Button text='Save' onChange={editTask}></Button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <input type='checkbox' onClick={handleCheck} />
-      <Link href='/todos'>Check out the remaining tasks</Link>
+      <br />
+      <Button text='Todos' onChange={() => router.push('/todos')}></Button>
     </div>
   );
 }

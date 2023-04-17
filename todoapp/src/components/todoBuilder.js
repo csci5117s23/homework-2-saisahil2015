@@ -2,12 +2,14 @@ import styles from '../styles/TodoList.module.css';
 import Button from './button';
 import { useState } from 'react';
 import CategoryList from './categoryList';
+import { useRouter } from 'next/router';
 
 export default function TodoBuilder({
   addTask,
   needToAddCategory,
   sentCategory,
 }) {
+  const router = useRouter();
   const [taskContent, setTaskContent] = useState('');
   const [category, setCategory] = useState('');
 
@@ -59,6 +61,8 @@ export default function TodoBuilder({
           className={styles.newTaskInput}
         />
         <Button text='Add Task'></Button>
+        <br></br>
+        <Button text='Todos' onChange={() => router.push('/todos')}></Button>
       </form>
     </div>
   );
