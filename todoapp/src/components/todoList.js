@@ -26,7 +26,7 @@ export default function TodoList({ done }) {
       } else {
         data = await getAllUncheckedTasks(token);
       }
-      console.log('Data: ', data);
+      // console.log('Data: ', data);
       setTaskList(data);
       setLoading(false);
     }
@@ -38,14 +38,14 @@ export default function TodoList({ done }) {
 
   async function addTask(newTask) {
     const token = await getToken({ template: 'codehooks' });
-    console.log('New Task: ', newTask);
+    // console.log('New Task: ', newTask);
     await postTask(token, newTask);
     const data = await getAllUncheckedTasks(token);
     setTaskList(data);
     setLoading(false);
   }
 
-  console.log('Done test: ', done);
+  // console.log('Done test: ', done);
   const taskContent = done
     ? taskList
         .filter((task) => task.checked)

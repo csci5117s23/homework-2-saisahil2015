@@ -19,16 +19,16 @@ export default function TodoItem() {
 
   async function getTasks() {
     if (userId) {
-      console.log('Id: ', id);
+      // console.log('Id: ', id);
       const token = await getToken({ template: 'codehooks' });
       const result = await getTaskById(token, id);
-      console.log('Result: ', result);
+      // console.log('Result: ', result);
       const category = result.category;
-      console.log('Category Value: ', category);
+      // console.log('Category Value: ', category);
       setCurrentCategory(category);
       var categories = await getAllCategories(token);
       categories = categories.filter((c) => c.tag !== category);
-      console.log('Categories: ', categories);
+      // console.log('Categories: ', categories);
       setOtherCategories(categories);
       setTodoItemInfo(result);
       setLoading(false);
@@ -42,11 +42,11 @@ export default function TodoItem() {
   function handleInputChange(e) {
     const { name, value } = e.target;
     setTodoItemInfo({ ...todoItemInfo, [name]: value });
-    console.log('Check: ', todoItemInfo);
+    // console.log('Check: ', todoItemInfo);
   }
   async function editTask() {
     const token = await getToken({ template: 'codehooks' });
-    console.log('TodoItem: ', todoItemInfo);
+    // console.log('TodoItem: ', todoItemInfo);
     await putTask(token, todoItemInfo);
   }
 
@@ -60,14 +60,14 @@ export default function TodoItem() {
       category: todo.category,
       createdOn: todo.createdOn,
     };
-    console.log("Here's the new task: ", updatedTask);
+    // console.log("Here's the new task: ", updatedTask);
     const token = await getToken({ template: 'codehooks' });
     await putTask(token, updatedTask);
     router.push('/done');
   }
 
   async function changeCategory() {
-    console.log('Selected category check: ', selectedCategory);
+    // console.log('Selected category check: ', selectedCategory);
     const updatedTask = {
       _id: todoItemInfo._id,
       info: todoItemInfo.info,
@@ -76,11 +76,11 @@ export default function TodoItem() {
       category: selectedCategory.tag,
       createdOn: todoItemInfo.createdOn,
     };
-    console.log("Here's the updated task: ", updatedTask);
+    // console.log("Here's the updated task: ", updatedTask);
     const token = await getToken({ template: 'codehooks' });
     await putTask(token, updatedTask);
     getTasks();
-    console.log('Current Changed Category: ', currentCategory);
+    // console.log('Current Changed Category: ', currentCategory);
   }
 
   return loading ? (
@@ -113,10 +113,10 @@ export default function TodoItem() {
       </p>
       <div style={{ marginTop: '2rem' }}>
         {otherCategories.map((c) => {
-          console.log('Categories Value: ', c);
-          console.log('Selected category: ', selectedCategory);
-          console.log('Todo check: ', todoItemInfo);
-          console.log('Current  Category: ', currentCategory);
+          // console.log('Categories Value: ', c);
+          // console.log('Selected category: ', selectedCategory);
+          // console.log('Todo check: ', todoItemInfo);
+          // console.log('Current  Category: ', currentCategory);
 
           return (
             <Category key={c._id} tag={c} onChange={changeSelectedCategory} />

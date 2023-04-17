@@ -16,7 +16,7 @@ export default function Todo({ todo, onChange }) {
       category: todo.category,
       createdOn: todo.createdOn,
     };
-    console.log("Here's the new task: ", updatedTask);
+    // console.log("Here's the new task: ", updatedTask);
     const token = await getToken({ template: 'codehooks' });
     await putTask(token, updatedTask);
     onChange();

@@ -23,8 +23,8 @@ export default function CategoryList({ manageCategory }) {
     if (userId) {
       const token = await getToken({ template: 'codehooks' });
       const data = await getAllCategories(token);
-      console.log('Data: ', data);
-      console.log('Categories data check: ', data);
+      // console.log('Data: ', data);
+      // console.log('Categories data check: ', data);
       setCategories(data);
       setLoading(false);
     }
@@ -34,17 +34,17 @@ export default function CategoryList({ manageCategory }) {
     const token = await getToken({ template: 'codehooks' });
     await postCategory(token, newCategory);
     const data = await getAllCategories(token);
-    console.log('Categories data add check: ', data);
+    // console.log('Categories data add check: ', data);
     setCategories(data);
     setLoading(false);
   }
 
   async function deleteCategory() {
     const token = await getToken({ template: 'codehooks' });
-    console.log('Selected Category: ', selectedCategory);
+    // console.log('Selected Category: ', selectedCategory);
     await deleteCategoryById(token, selectedCategory._id);
     const data = await getAllCategories(token);
-    console.log('Categories data add check: ', data);
+    // console.log('Categories data add check: ', data);
     setCategories(data);
     setLoading(false);
   }
@@ -75,7 +75,7 @@ export default function CategoryList({ manageCategory }) {
         </h1>
         <div className='columns' style={{ marginBottom: '2rem' }}>
           {categories.map((category) => {
-            console.log('Categories: ', category._id);
+            // console.log('Categories: ', category._id);
             return (
               <Category
                 key={category._id}

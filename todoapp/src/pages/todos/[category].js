@@ -16,7 +16,7 @@ import TodoBuilder from '@/components/todoBuilder';
 
 export default function IncompleteTasksWithCategoris() {
   const router = useRouter();
-  console.log('Router info: ', router);
+  // console.log('Router info: ', router);
   const { category } = router.query;
   const [loading, setLoading] = useState(true);
   const [categoryTag, setCategoryTag] = useState(null);
@@ -25,17 +25,17 @@ export default function IncompleteTasksWithCategoris() {
 
   async function fetchIncompleteTasksForCategory() {
     const token = await getToken({ template: 'codehooks' });
-    console.log('Category check: ', category);
+    // console.log('Category check: ', category);
     const categoryName = await getCategoryById(token, category);
     // setCategory(categoryInfo.tag);
-    console.log('Hello');
+    // console.log('Hello');
     const incompleteTasksForCategory = await getIncompleteTasksForCategory(
       token,
       categoryName.tag
     );
     setCategoryTag(categoryName.tag);
-    console.log('Category Name Checkinggg: ', categoryName);
-    console.log('incompleteTasksForCategory: ', incompleteTasksForCategory);
+    // console.log('Category Name Checkinggg: ', categoryName);
+    // console.log('incompleteTasksForCategory: ', incompleteTasksForCategory);
     setTaskList(incompleteTasksForCategory);
     setLoading(false);
   }
@@ -46,7 +46,7 @@ export default function IncompleteTasksWithCategoris() {
 
   async function addTask(newTask) {
     const token = await getToken({ template: 'codehooks' });
-    console.log('New Task: ', newTask);
+    // console.log('New Task: ', newTask);
     await postTask(token, newTask);
     fetchIncompleteTasksForCategory();
   }
@@ -59,7 +59,7 @@ export default function IncompleteTasksWithCategoris() {
         {' '}
         <strong>{categoryTag}</strong>
       </div>
-      {console.log('Tasklist: ', taskList)}
+      {/* {console.log('Tasklist: ', taskList)} */}
       {taskList.map((task) => {
         return (
           <Todo

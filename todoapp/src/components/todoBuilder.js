@@ -23,7 +23,7 @@ export default function TodoBuilder({
         category: category.tag,
       });
     } else {
-      console.log('Value: ', sentCategory);
+      // console.log('Value: ', sentCategory);
       await addTask({
         info: taskContent.trim(),
         checked: false,
