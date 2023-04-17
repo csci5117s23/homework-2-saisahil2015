@@ -55,7 +55,10 @@ export default function IncompleteTasksWithCategoris() {
     <span>Loading...</span>
   ) : (
     <div className={styles.todoList}>
-      {categoryTag}
+      <div className='subtitle' style={{ marginLeft: '40%' }}>
+        {' '}
+        <strong>{categoryTag}</strong>
+      </div>
       {console.log('Tasklist: ', taskList)}
       {taskList.map((task) => {
         return (

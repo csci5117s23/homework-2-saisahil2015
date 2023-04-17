@@ -6,12 +6,16 @@ import { useAuth } from '@clerk/nextjs';
 
 export default function Category({ tag, onChange }) {
   return (
-    <div>
+    <div className='column' style={{ display: 'flex', flexDirection: 'row' }}>
       <Link href={`/todos/${tag._id}`} key={tag._id}>
-        {' '}
         <p>{tag.tag}</p>
       </Link>
-      <input type='radio' name='categories' onClick={() => onChange(tag)} />
+      <input
+        type='radio'
+        name='categories'
+        onClick={() => onChange(tag)}
+        style={{ marginLeft: '10px' }}
+      />
     </div>
   );
 }

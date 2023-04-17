@@ -45,10 +45,14 @@ export default function IncompleteTasksWithCategoris() {
     <span>Loading...</span>
   ) : (
     <div className={styles.todoList}>
-      {categoryTag}
+      <div className='subtitle' style={{ marginLeft: '40%' }}>
+        {' '}
+        <strong>{categoryTag}</strong>
+      </div>
       {taskList.map((task) => {
         return <Todo key={task._id} todo={task}></Todo>;
       })}
+      <Button text='Todos' onChange={() => router.push('/todos')}></Button>
     </div>
   );
 }

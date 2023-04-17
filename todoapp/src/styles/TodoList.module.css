@@ -1,9 +1,12 @@
+@import url('https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css');
+
 .todoList {
-    margin-top: 20%;
-    margin-left: 35%;
-    width: 30%;
-    padding: 40px;
-    background-color: #f1f1f1;
+    margin: auto;
+    padding: 5rem;
+    /* background-color: #F1F3F4; */
+    background-color: #F1F2EE;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
   }
   
   .todo {
@@ -14,7 +17,7 @@
     padding: 10px;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
   }
 
   .button {
