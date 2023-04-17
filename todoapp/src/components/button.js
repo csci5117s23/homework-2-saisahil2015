@@ -1,16 +1,8 @@
 import styles from '../styles/TodoList.module.css';
 
-export default function Button({ text, onChange, deleteClass, addClass }) {
+export default function Button({ text, onChange, addClass }) {
   if (onChange) {
-    if (deleteClass) {
-      return (
-        <button
-          className='delete is-large'
-          style={{ backgroundColor: 'red' }}
-          onClick={() => onChange()}
-        ></button>
-      );
-    } else if (addClass) {
+    if (addClass) {
       return (
         <button
           className={styles.button}
